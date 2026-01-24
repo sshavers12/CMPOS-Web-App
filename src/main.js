@@ -1,13 +1,24 @@
-import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
-import { auth } from "./firebase.js";
+// --- 1. FIREBASE CONFIGURATION & INIT ---
+const firebaseConfig = {
+    apiKey: "AIzaSyB5zhFsdqM1XWPFNSCealDIttw6qB0Nag",
+    authDomain: "cmpos-auth.firebaseapp.com",
+    projectId: "cmpos-auth",
+    storageBucket: "cmpos-auth.firebasestorage.app",
+    messagingSenderId: "301926083924",
+    appId: "1:301926083924:web:c30c9278ea41691276acc1",
+    measurementId: "G-ZDRV14FWTJ"
+};
 
-// --- 1. CONFIGURATION ---
-// Integrted Apps Script Endpoint
+// Initialize Firebase (Compat)
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const analytics = firebase.analytics();
+const provider = new firebase.auth.GoogleAuthProvider();
+
+// --- 2. CONFIGURATION ---
 const API_URL = "https://script.google.com/macros/s/AKfycby469tBOVlC0ods6AiLeq8M06EfZ2PGJyk47kfGcdlgUIL7bAWAKmo-vPjsqBUxI-IB/exec";
 
-const provider = new GoogleAuthProvider();
-
-// --- 2. THE HARDCODED USER LIST (NO BACKEND REQUIRED) ---
+// --- 3. THE HARDCODED USER LIST (NO BACKEND REQUIRED) ---
 const AUTHORIZED_USERS = {
     "samshavers@kingdomcommunications.net": { role: "SUPER_ADMIN", key: "## ADMIN-ALPHA-99 ##" },
     "info@cmpradio.net": { role: "SUPER_ADMIN", key: "## ADMIN-ALPHA-99 ##" },
@@ -15,10 +26,10 @@ const AUTHORIZED_USERS = {
     "illadelphia06@gmail.com": { role: "VOLUNTEER", key: "## VOL-CHARLIE-33 ##" }
 };
 
-// --- 3. AUTH FUNCTION ---
+// --- 4. AUTH FUNCTION ---
 window.triggerAuth = async () => {
     try {
-        const result = await signInWithPopup(auth, provider);
+        const result = await auth.signInWithPopup(provider);
         const email = result.user.email.toLowerCase();
 
         console.log("Attempting Login:", email);
@@ -41,7 +52,7 @@ window.triggerAuth = async () => {
         } else {
             // Failure
             alert(`ACCESS DENIED\nUser: ${email}\n\nYou are not in the authorized list. Contact JP/Admin.`);
-            await signOut(auth);
+            await auth.signOut();
         }
     } catch (error) {
         console.error(error);
@@ -49,7 +60,7 @@ window.triggerAuth = async () => {
     }
 };
 
-// --- 4. SUBMIT FUNCTION ---
+// --- 5. SUBMIT FUNCTION ---
 window.realSubmit = async (e, type) => {
     e.preventDefault();
     const btn = e.target.querySelector('button');
@@ -92,28 +103,40 @@ window.realSubmit = async (e, type) => {
     }
 };
 
-// --- 5. PORTAL LOGIC ---
+// --- 6. PORTAL LOGIC ---
 window.switchPortal = (portal) => {
-    document.getElementById('btn-foundation').classList.remove('active');
-    document.getElementById('btn-radio').classList.remove('active');
+    const btnFoundation = document.getElementById('btn-foundation');
+    const btnRadio = document.getElementById('btn-radio');
+    const portalFoundation = document.getElementById('portal-foundation');
+    const portalRadio = document.getElementById('portal-radio');
+
+    if (!btnFoundation || !btnRadio || !portalFoundation || !portalRadio) return;
+
+    btnFoundation.classList.remove('active');
+    btnRadio.classList.remove('active');
     document.getElementById(`btn-${portal}`).classList.add('active');
 
     if (portal === 'foundation') {
-        document.getElementById('portal-foundation').classList.remove('hidden');
-        document.getElementById('portal-radio').classList.add('hidden');
+        portalFoundation.classList.remove('hidden');
+        portalRadio.classList.add('hidden');
         document.body.style.backgroundColor = "#050505";
     } else {
-        document.getElementById('portal-radio').classList.remove('hidden');
-        document.getElementById('portal-foundation').classList.add('hidden');
+        portalRadio.classList.remove('hidden');
+        portalFoundation.classList.add('hidden');
         document.body.style.backgroundColor = "#080808";
-        window.loadLatestVideo();
+        if (window.loadLatestVideo) window.loadLatestVideo();
     }
     window.scrollTo(0, 0);
 };
 
 window.scrollToId = (id) => {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
 };
 
 window.loadLatestVideo = async () => { console.log("Stream Refresh Triggered"); };
-window.switchPortal('foundation');
+
+// Initialize View
+window.addEventListener('load', () => {
+    window.switchPortal('foundation');
+});
