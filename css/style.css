@@ -1,0 +1,93 @@
+/* CMPOS SYSTEM LOCK: v1.5 */
+:root {
+    --bg-deep: #050505;
+    --bg-panel: rgba(20, 20, 20, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --accent-orange: #FFD400; /* Kingdom Gold as per prompt */
+    --text-white: #FFFFFF;
+    --text-mute: #A0A0A0;
+    --font-head: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-deep);
+    color: var(--text-white);
+    font-family: var(--font-head);
+    overflow-x: hidden;
+    min-height: 100vh;
+    padding-top: 80px; /* Nav spacing */
+}
+
+/* TYPOGRAPHY */
+h1 { font-size: 3rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 1rem; }
+h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.02em; border-left: 3px solid var(--accent-orange); padding-left: 1rem; }
+h3 { font-size: 1.1rem; font-weight: 700; color: white; }
+p { color: var(--text-mute); line-height: 1.6; margin-bottom: 1.5rem; max-width: 65ch; }
+
+.mono { font-family: var(--font-mono); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; color: var(--accent-orange); display: block; margin-bottom: 0.5rem; }
+
+/* UTILITIES */
+.hidden { display: none !important; }
+.grid-2 { display: grid; grid-template-columns: 1fr; gap: 3rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+
+@media(min-width: 768px) {
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+}
+
+/* COMPONENTS */
+.glass-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    border-radius: 6px;
+    padding: 2rem;
+    transition: border-color 0.3s;
+}
+.glass-card:hover { border-color: rgba(255, 212, 0, 0.3); }
+
+.btn {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 0.8rem 1.6rem;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+}
+.btn:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
+.btn-fill { background: var(--accent-orange); color: black; border-color: var(--accent-orange); }
+.btn-fill:hover { background: white; border-color: white; color: black; }
+
+/* NAVIGATION */
+#global-nav {
+    position: fixed; top: 0; left: 0; width: 100%; height: 80px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 5%;
+    background: rgba(5, 5, 5, 0.95);
+    border-bottom: 1px solid var(--glass-border);
+    z-index: 1000;
+}
+.nav-group { display: flex; gap: 2rem; align-items: center; }
+.nav-brand { 
+    font-family: var(--font-head); font-weight: 900; letter-spacing: -0.03em; 
+    font-size: 1.1rem; cursor: pointer; color: #555; transition: color 0.3s; 
+}
+.nav-brand.active { color: white; }
+.live-indicator {
+    display: inline-block; width: 6px; height: 6px; background: red; border-radius: 50%;
+    margin-left: 6px; box-shadow: 0 0 8px red; animation: pulse 2s infinite; 
+}
+
+/* PORTAL */
+.portal-view { padding: 3rem 0; width: 90%; max-width: 1400px; margin: 0 auto; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }

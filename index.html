@@ -4,78 +4,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CMPOS | Chester Media Project</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap"
+    <title>CMP Foundation | CMP Radio</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
-    <style>
-        :root {
-            --bg: #050505;
-            --gold: #FFD400;
-            --glass: rgba(255, 255, 255, 0.05);
-        }
 
-        body {
-            background: var(--bg);
-            color: white;
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 2rem;
-        }
-
-        .glass-card {
-            background: var(--glass);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 8px;
-        }
-
-        .btn {
-            background: var(--gold);
-            color: black;
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3rem;
-        }
-
-        h1 {
-            font-weight: 900;
-            letter-spacing: -1px;
-        }
-    </style>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>CMPOS <span style="color:var(--gold)">LIVE</span></h1>
-        <button id="btn-login" class="btn">OS LOGIN</button>
-    </header>
-
-    <main>
-        <h2>Latest Broadcasts</h2>
-        <div id="featured-shows" class="grid">
-            <!-- Populated by youtube.js -->
-            <div class="glass-card">Loading Stream...</div>
+    <nav id="global-nav">
+        <div class="nav-group">
+            <div class="nav-brand active" id="btn-foundation" onclick="switchPortal('foundation')">
+                CMP FOUNDATION
+            </div>
+            <div style="width:1px; height: 20px; background:#333;"></div>
+            <div class="nav-brand" id="btn-radio" onclick="switchPortal('radio')">
+                CMP RADIO <span class="live-indicator"></span>
+            </div>
         </div>
-    </main>
+        <div class="nav-group">
+            <button id="btn-login" class="btn">OS LOGIN</button>
+        </div>
+    </nav>
 
+    <!-- FOUNDATION PORTAL -->
+    <div id="portal-foundation" class="portal-view">
+        <div class="grid-2">
+            <div>
+                <span class="mono">EST. 2018 // 501(c)(3) NON-PROFIT</span>
+                <h1>Architecture of<br><span style="color:var(--accent-orange)">Community Power.</span></h1>
+                <p>CMP exists to build trusted community media infrastructure in Chester. We amplify authentic local
+                    narratives and create pathways for neighbors to inform, connect, and lead positive change.</p>
+                <button class="btn btn-fill">Support The Mission</button>
+            </div>
+            <div class="glass-card" style="border-left: 4px solid var(--accent-orange);">
+                <span class="mono">THE ORIGIN STORY</span>
+                <p
+                    style="font-size: 1.25rem; font-style:italic; border-left:1px solid #333; padding-left:1rem; margin:1rem 0;">
+                    "Chester had a narrative controlled by outsiders, no platform for its own voice, and no organized
+                    framework for transforming pain into purpose."
+                </p>
+                <div style="display:flex; gap:2rem; margin-top:2rem;">
+                    <div><span class="mono">Years Leading</span><strong style="font-size:1.5rem;">8</strong></div>
+                    <div><span class="mono">Impact</span><strong style="font-size:1.5rem;">$220k</strong></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RADIO PORTAL -->
+    <div id="portal-radio" class="portal-view hidden">
+        <div class="grid-2" style="margin-bottom:4rem;">
+            <div
+                style="background:#000; border:1px solid #333; aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;">
+                <a href="https://www.youtube.com/@cmpradio6904" target="_blank" class="btn btn-fill">WATCH LIVE ON
+                    YOUTUBE</a>
+            </div>
+            <div>
+                <span class="mono">NOW STREAMING</span>
+                <h1>The Voice of<br><span style="color:var(--accent-orange)">Chester.</span></h1>
+                <p>Unapologetic community radio. We do not silence opinions or lived experiences, even if they are
+                    uncomfortable.</p>
+                <div class="glass-card">
+                    <span class="mono">RECENT BROADCASTS</span>
+                    <div id="featured-shows" class="grid-4"
+                        style="grid-template-columns: 1fr 1fr; margin-top:0.5rem; gap:1rem;">
+                        <!-- JS INJECTS CARDS HERE -->
+                        <div style="grid-column:1/-1; color:#555;">Connecting to YouTube API...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APP MODULE -->
     <script type="module" src="./js/app.js"></script>
 
 </body>
