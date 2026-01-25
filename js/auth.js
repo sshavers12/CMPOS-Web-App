@@ -12,8 +12,9 @@ export async function login() {
         // Initializing Dashboard System
         // Initializing Dashboard System
         console.log("Loading Studio Modules...");
-        await import('./dashboard.js');
-        await import('./intelligence.js');
+        const v = Date.now();
+        await import(`./dashboard.js?v=${v}`);
+        await import(`./intelligence.js?v=${v}`);
 
         if (window.dashboard) {
             console.log("Launching Dashboard...");
