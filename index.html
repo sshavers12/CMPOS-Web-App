@@ -10,15 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- VISUAL SYSTEM LOCK: v1.3 --- */
+        /* --- VISUAL SYSTEM LOCK: v1.7 (Stable) --- */
         :root {
             --bg-deep: #050505;
-            --bg-panel: rgba(20, 20, 20, 0.8);
+            --bg-panel: rgba(20, 20, 20, 0.7);
             --glass-border: rgba(255, 255, 255, 0.1);
             --accent-orange: #FF6700;
             --text-white: #FFFFFF;
-            --text-mute: #999999;
-            
+            --text-mute: #A0A0A0;
             --font-head: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
@@ -35,20 +34,19 @@
 
         /* --- TYPOGRAPHY --- */
         h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 1rem; }
-        h2 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.02em; }
-        h3 { font-size: 1.25rem; font-weight: 600; color: var(--text-white); margin-bottom: 0.5rem; }
-        p { color: var(--text-mute); line-height: 1.6; margin-bottom: 1.5rem; max-width: 65ch; font-weight: 300; }
-        
+        h2 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.02em; border-left: 3px solid var(--accent-orange); padding-left: 1rem; }
+        h3 { font-size: 1.25rem; font-weight: 700; color: var(--text-white); margin-bottom: 0.5rem; }
+        p { color: var(--text-mute); line-height: 1.6; margin-bottom: 1.5rem; max-width: 65ch; font-weight: 400; }
         .mono { font-family: var(--font-mono); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; color: var(--accent-orange); display: block; margin-bottom: 0.75rem; }
+        .quote-large { font-size: 1.5rem; font-weight: 300; font-style: italic; color: white; border-left: 1px solid var(--accent-orange); padding-left: 2rem; margin: 2rem 0; }
         
         /* --- UTILITIES --- */
         .hidden { display: none !important; }
         .grid-2 { display: grid; grid-template-columns: 1fr; gap: 4rem; }
-        .grid-3 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-        
+        .grid-4 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
         @media(min-width: 768px) {
             .grid-2 { grid-template-columns: 1fr 1fr; }
-            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+            .grid-4 { grid-template-columns: 1fr 1fr; }
         }
 
         /* --- COMPONENTS --- */
@@ -61,8 +59,11 @@
             position: relative;
             overflow: hidden;
             transition: border-color 0.3s ease;
+            height: 100%;
         }
         .glass-card:hover { border-color: var(--glass-border); }
+
+        .tag { display: inline-block; padding: 2px 8px; background: rgba(255, 103, 0, 0.15); color: var(--accent-orange); font-size: 0.7rem; border-radius: 4px; font-family: var(--font-mono); margin-bottom: 0.5rem; }
 
         .btn {
             background: transparent;
@@ -79,7 +80,6 @@
             display: inline-block;
             text-decoration: none;
         }
-
         .btn:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
         .btn-fill { background: var(--accent-orange); color: black; border-color: var(--accent-orange); }
         .btn-fill:hover { background: white; border-color: white; color: black; }
@@ -93,148 +93,74 @@
             border-bottom: 1px solid var(--glass-border);
             z-index: 1000;
         }
-
         .nav-group { display: flex; gap: 2rem; align-items: center; }
-        
-        .nav-brand { 
-            font-family: var(--font-head); 
-            font-weight: 900; 
-            letter-spacing: -0.03em; 
-            font-size: 1.1rem; 
-            cursor: pointer; 
-            color: #555; 
-            transition: color 0.3s; 
-        }
+        .nav-brand { font-family: var(--font-head); font-weight: 900; letter-spacing: -0.03em; font-size: 1.1rem; cursor: pointer; color: #555; transition: color 0.3s; }
         .nav-brand.active { color: white; }
         .nav-brand:hover { color: var(--accent-orange); }
-
-        .live-indicator {
-            display: inline-block; width: 6px; height: 6px; background: red; border-radius: 50%;
-            margin-left: 6px; box-shadow: 0 0 8px red; animation: pulse 2s infinite; vertical-align: middle;
-        }
-
-        /* --- LOGIN BUTTON --- */
-        .btn-login {
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            padding: 0.5rem 1rem;
-            border: 1px solid #333;
-            border-radius: 4px;
-            color: #888;
-            cursor: pointer;
-            background: transparent;
-            transition: all 0.2s;
-        }
+        .live-indicator { display: inline-block; width: 6px; height: 6px; background: red; border-radius: 50%; margin-left: 6px; box-shadow: 0 0 8px red; animation: pulse 2s infinite; vertical-align: middle; }
+        .btn-login { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.5rem 1rem; border: 1px solid #333; border-radius: 4px; color: #888; cursor: pointer; background: transparent; transition: all 0.2s; }
         .btn-login:hover { color: white; border-color: white; }
-
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
 
         /* --- PORTAL WRAPPERS --- */
         .portal-view { padding-top: 140px; padding-bottom: 4rem; max-width: 1400px; margin: 0 auto; width: 90%; }
-
-        /* --- SPECIFIC MODULES --- */
-        .acronym-box {
-            border-left: 2px solid var(--accent-orange);
-            padding-left: 1.5rem; margin-bottom: 2.5rem;
-        }
+        .acronym-box { border-left: 2px solid var(--accent-orange); padding-left: 1.5rem; margin-bottom: 2.5rem; }
         .acronym-box span { font-size: 1.25rem; font-weight: 300; display: block; color: #ddd; margin-bottom: 0.25rem; }
         .acronym-box strong { color: var(--accent-orange); font-weight: 700; }
 
         /* --- VIDEO PLAYER --- */
-        .video-container {
-            width: 100%; aspect-ratio: 16/9; background: #000;
-            border: 1px solid #333;
-            display: flex; align-items: center; justify-content: center;
-            position: relative;
-        }
-        iframe { width: 100%; height: 100%; border: none; }
-
+        .video-container { width: 100%; aspect-ratio: 16/9; background: #000; border: 1px solid #333; display: flex; align-items: center; justify-content: center; position: relative; }
+        iframe { width: 100%; height: 100%; }
+        
         /* --- FOOTER --- */
-        footer {
-            border-top: 1px solid #333;
-            padding: 4rem 2rem;
-            margin-top: 4rem;
-            background: #000;
-            color: #666;
-            font-size: 0.9rem;
-            text-align: center;
-        }
+        footer { border-top: 1px solid #333; padding: 4rem 2rem; margin-top: 4rem; background: #000; color: #666; font-size: 0.9rem; text-align: center; }
     </style>
 </head>
 <body>
 
     <nav id="global-nav">
         <div class="nav-group">
-            <div class="nav-brand active" id="btn-foundation" onclick="switchPortal('foundation')">
-                CMP FOUNDATION
-            </div>
+            <div class="nav-brand active" id="btn-foundation" onclick="switchPortal('foundation')">CMP FOUNDATION</div>
             <div style="width:1px; height: 20px; background:#333;"></div>
-            <div class="nav-brand" id="btn-radio" onclick="switchPortal('radio')">
-                CMP RADIO <span class="live-indicator"></span>
-            </div>
+            <div class="nav-brand" id="btn-radio" onclick="switchPortal('radio')">CMP RADIO <span class="live-indicator"></span></div>
         </div>
-        
         <div class="nav-group">
             <button class="btn-login" onclick="triggerAuth()">OS LOGIN</button>
         </div>
     </nav>
 
     <div id="portal-foundation" class="portal-view">
-        
         <div class="grid-2" style="margin-bottom: 6rem; align-items: start;">
             <div>
-                <span class="mono">EST. 2001 // CHESTER, PA</span>
-                <h1>Architecture of<br><span style="color:var(--accent-orange)">Community.</span></h1>
-                <p>CMP Foundation is a 501(c)(3) non-profit organization dedicated to civic literacy, journalism training, and cultural preservation.</p>
-                
+                <span class="mono">EST. 2018 // 501(c)(3) NON-PROFIT</span>
+                <h1>Architecture of<br><span style="color:var(--accent-orange)">Community Power.</span></h1>
+                <p>CMP exists to build trusted community media infrastructure in Chester. We amplify authentic local narratives and create pathways for neighbors to inform, connect, and lead positive change.</p>
                 <div class="acronym-box">
                     <span class="mono">MISSION</span>
                     <span><strong>C</strong>onstantly <strong>M</strong>aking <strong>P</strong>rogress</span>
                     <span><strong>C</strong>ultivating <strong>M</strong>ature <strong>P</strong>ositivity</span>
                 </div>
-                
                 <button class="btn btn-fill" onclick="scrollToId('foundation-join')">Support The Mission</button>
             </div>
             
-            <div class="glass-card">
-                <h3 style="border-bottom: 1px solid #333; padding-bottom:1rem; margin-bottom: 1.5rem;">Community Impact</h3>
-                <div class="grid-2" style="gap: 2rem; margin-bottom: 0;">
-                    <div>
-                        <span class="mono">Youth Trained</span>
-                        <div style="font-size: 3rem; font-weight:900; color: white;">850+</div>
-                        <p style="font-size: 0.8rem; margin:0;">Journalism & Media Arts</p>
-                    </div>
-                    <div>
-                        <span class="mono">Years Active</span>
-                        <div style="font-size: 3rem; font-weight:900; color: white;">24</div>
-                        <p style="font-size: 0.8rem; margin:0;">Serving Chester, PA</p>
-                    </div>
-                </div>
-                <div style="margin-top: 2rem; border-top: 1px solid #333; padding-top: 1rem;">
-                    <p style="font-size: 0.8rem; margin:0;">
-                        <a href="https://www.cmpradiofoundation.org" target="_blank" style="color:#666; text-decoration:none;">
-                            Visit Legacy Site Archive &rarr;
-                        </a>
-                    </p>
+            <div class="glass-card" style="border-left: 4px solid var(--accent-orange);">
+                <span class="mono">THE ORIGIN STORY</span>
+                <div class="quote-large">"Chester had a narrative controlled by outsiders, no platform for its own voice, and no organized framework for transforming pain into purpose."</div>
+                <p style="font-size: 0.9rem;">We solve the problem of disconnected communities lacking trusted information flow. We are the infrastructure for self-determination.</p>
+                <div style="margin-top: 2rem; display:flex; justify-content:space-between; align-items:center;">
+                    <div><span class="mono">Years Leading</span><strong style="font-size: 1.5rem; color:white;">8</strong></div>
+                    <div><span class="mono">Target Resources</span><strong style="font-size: 1.5rem; color:white;">$220k</strong></div>
                 </div>
             </div>
         </div>
 
         <div style="margin-bottom: 4rem;">
-            <span class="mono">OUR PROGRAMS</span>
-            <div class="grid-3">
-                <div class="glass-card">
-                    <h3>Civic Literacy</h3>
-                    <p>Connecting residents to the decisions that shape their neighborhoods through accessible media.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>Media Training</h3>
-                    <p>Providing access to professional equipment and mentorship for the next generation of storytellers.</p>
-                </div>
-                <div class="glass-card">
-                    <h3>Cultural Archive</h3>
-                    <p>Preserving the history, voice, and unfiltered stories of the Chester community.</p>
-                </div>
+            <h2 style="margin-bottom: 2rem;">Core Pillars</h2>
+            <div class="grid-4">
+                <div class="glass-card"><span class="tag">CORE</span><h3>Youth Media & Storytelling</h3><p style="font-size:0.9rem;">Building skills and positive identity. Includes podcasting workshops, sports broadcasting training, and the youth media lab.</p></div>
+                <div class="glass-card"><span class="tag">CORE</span><h3>Community Broadcasting</h3><p style="font-size:0.9rem;">Ongoing content that informs and elevates. Home of CMPRadio.net, local news coverage, and narrative programming.</p></div>
+                <div class="glass-card"><span class="tag">CORE</span><h3>Civic Literacy</h3><p style="font-size:0.9rem;">Increasing understanding of systems and politics. Includes "The Purple Room" and election night coverage.</p></div>
+                <div class="glass-card"><span class="tag">CORE</span><h3>Engagement & Events</h3><p style="font-size:0.9rem;">Place-based activation. Connecting families through "Fusion Fridays", wellness days, and block-based events.</p></div>
             </div>
         </div>
 
@@ -242,13 +168,13 @@
             <div class="grid-2">
                 <div>
                     <h2>Get Involved</h2>
-                    <p>We are looking for volunteers, board members, and technical operations staff.</p>
+                    <p>We are looking for volunteers, board members, and technical operations staff. We thrive on structure, defined roles, and accountability without shame.</p>
                     <p class="mono">admin@cmpradiofoundation.org</p>
                 </div>
-                <form onsubmit="fakeSubmit(event)">
+                <form onsubmit="realSubmit(event, 'VOLUNTEER_INTEREST')">
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-bottom: 1rem;">
-                        <input type="text" placeholder="Name" style="padding:1rem; background:#111; border:1px solid #333; color:white; font-family:var(--font-head);">
-                        <input type="email" placeholder="Email" style="padding:1rem; background:#111; border:1px solid #333; color:white; font-family:var(--font-head);">
+                        <input type="text" placeholder="Name" style="padding:1rem; background:#111; border:1px solid #333; color:white; font-family:var(--font-head);" required>
+                        <input type="email" placeholder="Email" style="padding:1rem; background:#111; border:1px solid #333; color:white; font-family:var(--font-head);" required>
                     </div>
                     <button class="btn btn-fill" style="width:100%">Submit Interest</button>
                 </form>
@@ -257,160 +183,174 @@
     </div>
 
     <div id="portal-radio" class="portal-view hidden">
-        
         <div class="grid-2" style="margin-bottom: 6rem;">
-            <div class="video-container" id="yt-player-container">
-                <div style="text-align:center;">
-                   <a href="https://www.youtube.com/@cmpradio6904" target="_blank" class="btn btn-fill">WATCH LIVE ON YOUTUBE</a>
-                   <p style="margin-top:1rem; font-size:0.8rem;">@cmpradio6904</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed?listType=playlist&list=UU6v127419131627&index=1" style="border:0;" allowfullscreen></iframe>
+                <div style="position:absolute; bottom:20px; left:20px; pointer-events:none;">
+                   <span style="background:red; color:white; padding: 3px 8px; font-size:0.7rem; font-weight:bold; border-radius:2px; font-family:var(--font-mono);">LIVE</span>
                 </div>
             </div>
             
             <div style="padding-left: 1rem; display:flex; flex-direction:column; justify-content:center;">
                 <span class="mono">NOW STREAMING</span>
                 <h1>The Voice of<br><span style="color:var(--accent-orange)">Chester.</span></h1>
-                <p>Bringing you the best that ever did it. Unapologetic community radio, streaming live from the heart of the city.</p>
-                
+                <p>Unapologetic community radio. We do not silence opinions or lived experiences, even if they are uncomfortable. The only line we draw is at harm or hate.</p>
                 <div class="acronym-box">
                     <span class="mono">STATION ID</span>
                     <span><strong>C</strong>hester <strong>M</strong>ade <strong>P</strong>roducts</span>
                     <span><strong>C</strong>hanging <strong>M</strong>edia's <strong>P</strong>erspective</span>
                 </div>
-                
                 <div style="display:flex; gap:1rem;">
-                    <button onclick="loadLatestVideo()" class="btn btn-fill">Refresh Stream</button>
-                    <button class="btn">View Schedule</button>
+                    <a href="https://www.youtube.com/@cmpradio6904/live" target="_blank" class="btn btn-fill">Open YouTube App</a>
                 </div>
             </div>
         </div>
-
-        <h2 style="margin-bottom:2rem;">Featured Shows</h2>
-        <div class="grid-3" style="margin-bottom: 4rem;">
-            <div class="glass-card" style="padding:0; transition: transform 0.2s;">
-                <div style="height:180px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
-                    <span style="font-size:3rem; filter: grayscale(100%);">🎙️</span>
+        
+        <div class="glass-card" style="margin-bottom: 4rem;">
+            <h2>Featured Shows</h2>
+             <div class="grid-4">
+                <div class="glass-card" style="padding:0; transition: transform 0.2s;">
+                    <div style="height:150px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
+                        <span style="font-size:2rem; filter: grayscale(100%);">🎙️</span>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3>The Voice No Chill</h3>
+                        <p style="font-size:0.8rem; margin-bottom: 1rem;">Raw, unfiltered conversations about what's really happening on the blocks.</p>
+                    </div>
                 </div>
-                <div style="padding: 2rem;">
-                    <h3>The Voice No Chill</h3>
-                    <p style="font-size:0.9rem; margin-bottom: 1.5rem;">Raw, unfiltered conversations about what's really happening on the blocks.</p>
+                <div class="glass-card" style="padding:0;">
+                    <div style="height:150px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
+                        <span style="font-size:2rem; filter: grayscale(100%);">💜</span>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3>The Purple Room</h3>
+                        <p style="font-size:0.8rem; margin-bottom: 1rem;">Politics explained for the community. Civic literacy in plain English.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="glass-card" style="padding:0;">
-                <div style="height:180px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
-                    <span style="font-size:3rem; filter: grayscale(100%);">🏙️</span>
+                <div class="glass-card" style="padding:0;">
+                    <div style="height:150px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
+                        <span style="font-size:2rem; filter: grayscale(100%);">💬</span>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3>Uncomfortable Convos</h3>
+                        <p style="font-size:0.8rem; margin-bottom: 1rem;">We lean into the hard topics that others ignore.</p>
+                    </div>
                 </div>
-                <div style="padding: 2rem;">
-                    <h3>Keeping It 100</h3>
-                    <p style="font-size:0.9rem; margin-bottom: 1.5rem;">Authenticity above all else. Local legends and hidden history.</p>
-                </div>
-            </div>
-            <div class="glass-card" style="padding:0;">
-                <div style="height:180px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
-                    <span style="font-size:3rem; filter: grayscale(100%);">✨</span>
-                </div>
-                <div style="padding: 2rem;">
-                    <h3>Parenting w/ Purpose</h3>
-                    <p style="font-size:0.9rem; margin-bottom: 1.5rem;">Resources, support, and real talk for raising the next generation.</p>
+                 <div class="glass-card" style="padding:0;">
+                    <div style="height:150px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
+                        <span style="font-size:2rem; filter: grayscale(100%);">✨</span>
+                    </div>
+                    <div style="padding: 1.5rem;">
+                        <h3>Project Engage</h3>
+                        <p style="font-size:0.8rem; margin-bottom: 1rem;">Youth + Elders storytelling. Bridging the gap.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 CMP Foundation. All Rights Reserved.</p>
+        <p>&copy; 2026 CMP Foundation (501c3). All Rights Reserved.</p>
         <p class="mono"><a href="https://www.cmpradiofoundation.org" style="color:#666;">www.cmpradiofoundation.org</a></p>
     </footer>
 
-    <script>
-        // === DUAL PORTAL LOGIC ===
-        function switchPortal(portal) {
-            document.getElementById('btn-foundation').classList.remove('active');
-            document.getElementById('btn-radio').classList.remove('active');
-            document.getElementById(`btn-${portal}`).classList.add('active');
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-            if(portal === 'foundation') {
-                document.getElementById('portal-foundation').classList.remove('hidden');
-                document.getElementById('portal-radio').classList.add('hidden');
-                document.body.style.backgroundColor = "#050505"; 
-            } else {
-                document.getElementById('portal-radio').classList.remove('hidden');
-                document.getElementById('portal-foundation').classList.add('hidden');
-                document.body.style.backgroundColor = "#080808"; 
-                loadLatestVideo(); // Auto-load video on switch
-            }
-            window.scrollTo(0,0);
+      // 1. BACKEND API (Apps Script)
+      const API_URL = "https://script.google.com/macros/s/AKfycby469tBOVlC0ods6AiLeq8M06EfZ2PGJyk47kfGcdlgUIL7bAWAKmo-vPjsqBUxI-IB/exec"; 
+      
+      // 2. FIREBASE CONFIG (PASTE YOURS HERE!)
+      const firebaseConfig = {
+        apiKey: "YOUR_API_KEY_GOES_HERE",
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT_ID.appspot.com",
+        messagingSenderId: "SENDER_ID",
+        appId: "APP_ID"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const provider = new GoogleAuthProvider();
+
+      // 3. AUTHORIZED USERS
+      const AUTHORIZED_USERS = {
+        "samshavers@kingdomcommunications.net": { role: "SUPER_ADMIN", key: "## ADMIN-ALPHA-99 ##" },
+        "info@cmpradio.net":                    { role: "SUPER_ADMIN", key: "## ADMIN-ALPHA-99 ##" },
+        "sshavers@me.com":                      { role: "PARTNER",     key: "## PARTNER-BRAVO-77 ##" },
+        "illadelphia06@gmail.com":              { role: "VOLUNTEER",   key: "## VOL-CHARLIE-33 ##" }
+      };
+
+      // 4. LOGIN FUNCTION
+      window.triggerAuth = async () => {
+        try {
+          const result = await signInWithPopup(auth, provider);
+          const email = result.user.email.toLowerCase();
+          
+          if (AUTHORIZED_USERS[email]) {
+            const user = AUTHORIZED_USERS[email];
+            navigator.clipboard.writeText(user.key);
+            alert(`SUCCESS: ${user.role}\n\n1. Key Copied: ${user.key}\n2. Paste it in the chat to unlock.`);
+            window.open("https://aistudio.google.com/app/prompts/new_chat", "_blank");
+          } else {
+            alert(`ACCESS DENIED: ${email} is not authorized.`);
+            await signOut(auth);
+          }
+        } catch (error) {
+          console.error(error);
+          alert("Login Failed. Did you add your URL to Authorized Domains in Firebase?\n\nError: " + error.message);
         }
+      };
 
-        // === SCROLL UTILITY ===
-        function scrollToId(id) {
-            document.getElementById(id).scrollIntoView({behavior: 'smooth'});
+      // 5. SUBMIT FUNCTION
+      window.realSubmit = async (e, type) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button');
+        const inputs = e.target.querySelectorAll('input, textarea');
+        const originalText = btn.innerText;
+        btn.innerText = "CONNECTING...";
+        btn.style.opacity = "0.7";
+
+        const data = {
+            action: 'submitIntake', type: type,
+            name: inputs[0].value, email: inputs[1].value,
+            message: inputs[2] ? inputs[2].value : "N/A"
+        };
+
+        try {
+            await fetch(API_URL, {
+                method: "POST", mode: "no-cors", 
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+            btn.innerText = "SUCCESS"; btn.style.background = "#4CAF50"; e.target.reset();
+            setTimeout(() => { btn.innerText = originalText; btn.style.background = "#FF6700"; btn.style.opacity = "1"; }, 3000);
+        } catch (error) {
+            btn.innerText = "ERROR"; btn.style.background = "red";
         }
+      };
 
-        // === FAKE SUBMIT ===
-        function fakeSubmit(e) {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            const original = btn.innerText;
-            btn.innerText = "SENDING...";
-            btn.style.opacity = "0.7";
-            setTimeout(() => {
-                btn.innerText = "RECEIVED";
-                btn.style.background = "#4CAF50"; 
-                btn.style.borderColor = "#4CAF50";
-                e.target.reset();
-                setTimeout(() => {
-                    btn.innerText = original;
-                    btn.style.background = "#FF6700";
-                    btn.style.borderColor = "#FF6700";
-                    btn.style.opacity = "1";
-                }, 2000);
-            }, 1000);
+      // 6. PORTAL SWITCHER
+      window.switchPortal = (portal) => {
+        document.getElementById('btn-foundation').classList.remove('active');
+        document.getElementById('btn-radio').classList.remove('active');
+        document.getElementById(`btn-${portal}`).classList.add('active');
+        if(portal === 'foundation') {
+            document.getElementById('portal-foundation').classList.remove('hidden');
+            document.getElementById('portal-radio').classList.add('hidden');
+            document.body.style.backgroundColor = "#050505"; 
+        } else {
+            document.getElementById('portal-radio').classList.remove('hidden');
+            document.getElementById('portal-foundation').classList.add('hidden');
+            document.body.style.backgroundColor = "#080808"; 
         }
+        window.scrollTo(0,0);
+      };
 
-        // === YOUTUBE API FETCH (Requires API Key) ===
-        // To make this live: Replace 'YOUR_API_KEY' with a real Google Data API Key
-        async function loadLatestVideo() {
-            const apiKey = 'YOUR_API_KEY_HERE'; 
-            const channelHandle = '@cmpradio6904'; 
-            // Note: In production, you'd use Channel ID: UCO... to save an API call
-            
-            // Placeholder logic until Key is added
-            if(apiKey === 'YOUR_API_KEY_HERE') {
-                console.log("CMP: No API Key provided. Using placeholder.");
-                return;
-            }
-
-            // If you add a key, this code will fetch the latest video
-            /*
-            try {
-                // 1. Get Channel Uploads Playlist ID
-                const chResponse = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=contentDetails&forHandle=${encodeURIComponent(channelHandle)}&key=${apiKey}`);
-                const chData = await chResponse.json();
-                const uploadsId = chData.items[0].contentDetails.relatedPlaylists.uploads;
-
-                // 2. Get Latest Video
-                const vResponse = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${uploadsId}&maxResults=1&key=${apiKey}`);
-                const vData = await vResponse.json();
-                const videoId = vData.items[0].snippet.resourceId.videoId;
-
-                // 3. Embed
-                document.getElementById('yt-player-container').innerHTML = `
-                    <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                `;
-            } catch (err) {
-                console.error("YouTube Fetch Error:", err);
-            }
-            */
-        }
-
-        // === AUTH TRIGGER ===
-        function triggerAuth() {
-            alert("SYSTEM LINK: Initiating Google Auth handshake...");
-            // Integrate Firebase Here
-        }
-
-        // Initialize
-        switchPortal('foundation');
+      window.scrollToId = (id) => { document.getElementById(id).scrollIntoView({behavior: 'smooth'}); };
+      window.switchPortal('foundation'); // Start at foundation
 
     </script>
 </body>
