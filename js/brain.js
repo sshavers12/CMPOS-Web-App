@@ -83,4 +83,4 @@ export class Intelligence {
     }
 }
 
-window.agent09 = new Intelligence();
+window.brain = new Intelligence();

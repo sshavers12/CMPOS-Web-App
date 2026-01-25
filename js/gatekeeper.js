@@ -13,7 +13,7 @@ export async function login() {
         console.log("Loading Studio Modules...");
         const v = Date.now();
         await import(`./studio.js?v=${v}`);
-        await import(`./intelligence.js?v=${v}`);
+        await import(`./brain.js?v=${v}`);
 
         if (window.studio) {
             console.log("Launching Studio...");
