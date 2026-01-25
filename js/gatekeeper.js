@@ -1,5 +1,8 @@
 import { auth } from "./firebase.js";
 import { signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+// Static Imports (No 404s allowed)
+import "./studio.js";
+import "./brain.js";
 
 const provider = new GoogleAuthProvider();
 
@@ -8,12 +11,6 @@ export async function login() {
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
         console.log("CMPOS Auth Success:", user.email);
-
-        // Initializing Dashboard System
-        console.log("Loading Studio Modules...");
-        const v = Date.now();
-        await import(`./studio.js?v=${v}`);
-        await import(`./brain.js?v=${v}`);
 
         if (window.studio) {
             console.log("Launching Studio...");
