@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB5zhFsdqM1XWPFNSCealDIttw6qB0Nag",
+    apiKey: "AIzaSyB5zhFsDagMlXWPfNsCEa1DItwt6qB0Nag",
     authDomain: "cmpos-auth.firebaseapp.com",
     databaseURL: "https://cmpos-auth-default-rtdb.firebaseio.com",
     projectId: "cmpos-auth",
