@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CMP Foundation | CMP Radio</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
 
     <style>
-        /* --- VISUAL SYSTEM LOCK: v1.7 (Stable) --- */
+        /* --- VISUAL SYSTEM LOCK: v1.8 (Live Patch) --- */
         :root {
             --bg-deep: #050505;
             --bg-panel: rgba(20, 20, 20, 0.7);
@@ -22,8 +25,12 @@
             --font-mono: 'JetBrains Mono', monospace;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             background-color: var(--bg-deep);
             color: var(--text-white);
@@ -33,20 +40,83 @@
         }
 
         /* --- TYPOGRAPHY --- */
-        h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 1rem; }
-        h2 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: -0.02em; border-left: 3px solid var(--accent-orange); padding-left: 1rem; }
-        h3 { font-size: 1.25rem; font-weight: 700; color: var(--text-white); margin-bottom: 0.5rem; }
-        p { color: var(--text-mute); line-height: 1.6; margin-bottom: 1.5rem; max-width: 65ch; font-weight: 400; }
-        .mono { font-family: var(--font-mono); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; color: var(--accent-orange); display: block; margin-bottom: 0.75rem; }
-        .quote-large { font-size: 1.5rem; font-weight: 300; font-style: italic; color: white; border-left: 1px solid var(--accent-orange); padding-left: 2rem; margin: 2rem 0; }
-        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            border-left: 3px solid var(--accent-orange);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: var(--text-mute);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            max-width: 65ch;
+            font-weight: 400;
+        }
+
+        .mono {
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            color: var(--accent-orange);
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+
+        .quote-large {
+            font-size: 1.5rem;
+            font-weight: 300;
+            font-style: italic;
+            color: white;
+            border-left: 1px solid var(--accent-orange);
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
         /* --- UTILITIES --- */
-        .hidden { display: none !important; }
-        .grid-2 { display: grid; grid-template-columns: 1fr; gap: 4rem; }
-        .grid-4 { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        .hidden {
+            display: none !important;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
         @media(min-width: 768px) {
-            .grid-2 { grid-template-columns: 1fr 1fr; }
-            .grid-4 { grid-template-columns: 1fr 1fr; }
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .grid-4 {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         /* --- COMPONENTS --- */
@@ -61,9 +131,21 @@
             transition: border-color 0.3s ease;
             height: 100%;
         }
-        .glass-card:hover { border-color: var(--glass-border); }
 
-        .tag { display: inline-block; padding: 2px 8px; background: rgba(255, 103, 0, 0.15); color: var(--accent-orange); font-size: 0.7rem; border-radius: 4px; font-family: var(--font-mono); margin-bottom: 0.5rem; }
+        .glass-card:hover {
+            border-color: var(--glass-border);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: rgba(255, 103, 0, 0.15);
+            color: var(--accent-orange);
+            font-size: 0.7rem;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            margin-bottom: 0.5rem;
+        }
 
         .btn {
             background: transparent;
@@ -80,49 +162,173 @@
             display: inline-block;
             text-decoration: none;
         }
-        .btn:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
-        .btn-fill { background: var(--accent-orange); color: black; border-color: var(--accent-orange); }
-        .btn-fill:hover { background: white; border-color: white; color: black; }
+
+        .btn:hover {
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
+        }
+
+        .btn-fill {
+            background: var(--accent-orange);
+            color: black;
+            border-color: var(--accent-orange);
+        }
+
+        .btn-fill:hover {
+            background: white;
+            border-color: white;
+            color: black;
+        }
 
         /* --- GLOBAL NAVIGATION --- */
         #global-nav {
-            position: fixed; top: 0; left: 0; width: 100%; height: 80px;
-            display: flex; justify-content: space-between; align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 0 3rem;
             background: rgba(5, 5, 5, 0.95);
             border-bottom: 1px solid var(--glass-border);
             z-index: 1000;
         }
-        .nav-group { display: flex; gap: 2rem; align-items: center; }
-        .nav-brand { font-family: var(--font-head); font-weight: 900; letter-spacing: -0.03em; font-size: 1.1rem; cursor: pointer; color: #555; transition: color 0.3s; }
-        .nav-brand.active { color: white; }
-        .nav-brand:hover { color: var(--accent-orange); }
-        .live-indicator { display: inline-block; width: 6px; height: 6px; background: red; border-radius: 50%; margin-left: 6px; box-shadow: 0 0 8px red; animation: pulse 2s infinite; vertical-align: middle; }
-        .btn-login { font-family: var(--font-mono); font-size: 0.75rem; padding: 0.5rem 1rem; border: 1px solid #333; border-radius: 4px; color: #888; cursor: pointer; background: transparent; transition: all 0.2s; }
-        .btn-login:hover { color: white; border-color: white; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+
+        .nav-group {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-family: var(--font-head);
+            font-weight: 900;
+            letter-spacing: -0.03em;
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: #555;
+            transition: color 0.3s;
+        }
+
+        .nav-brand.active {
+            color: white;
+        }
+
+        .nav-brand:hover {
+            color: var(--accent-orange);
+        }
+
+        .live-indicator {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: red;
+            border-radius: 50%;
+            margin-left: 6px;
+            box-shadow: 0 0 8px red;
+            animation: pulse 2s infinite;
+            vertical-align: middle;
+        }
+
+        .btn-login {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #888;
+            cursor: pointer;
+            background: transparent;
+            transition: all 0.2s;
+        }
+
+        .btn-login:hover {
+            color: white;
+            border-color: white;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
 
         /* --- PORTAL WRAPPERS --- */
-        .portal-view { padding-top: 140px; padding-bottom: 4rem; max-width: 1400px; margin: 0 auto; width: 90%; }
-        .acronym-box { border-left: 2px solid var(--accent-orange); padding-left: 1.5rem; margin-bottom: 2.5rem; }
-        .acronym-box span { font-size: 1.25rem; font-weight: 300; display: block; color: #ddd; margin-bottom: 0.25rem; }
-        .acronym-box strong { color: var(--accent-orange); font-weight: 700; }
+        .portal-view {
+            padding-top: 140px;
+            padding-bottom: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        .acronym-box {
+            border-left: 2px solid var(--accent-orange);
+            padding-left: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .acronym-box span {
+            font-size: 1.25rem;
+            font-weight: 300;
+            display: block;
+            color: #ddd;
+            margin-bottom: 0.25rem;
+        }
+
+        .acronym-box strong {
+            color: var(--accent-orange);
+            font-weight: 700;
+        }
 
         /* --- VIDEO PLAYER --- */
-        .video-container { width: 100%; aspect-ratio: 16/9; background: #000; border: 1px solid #333; display: flex; align-items: center; justify-content: center; position: relative; }
-        iframe { width: 100%; height: 100%; }
-        
+        .video-container {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+        }
+
         /* --- FOOTER --- */
-        footer { border-top: 1px solid #333; padding: 4rem 2rem; margin-top: 4rem; background: #000; color: #666; font-size: 0.9rem; text-align: center; }
+        footer {
+            border-top: 1px solid #333;
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+            background: #000;
+            color: #666;
+            font-size: 0.9rem;
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
 
     <nav id="global-nav">
         <div class="nav-group">
             <div class="nav-brand active" id="btn-foundation" onclick="switchPortal('foundation')">CMP FOUNDATION</div>
             <div style="width:1px; height: 20px; background:#333;"></div>
-            <div class="nav-brand" id="btn-radio" onclick="switchPortal('radio')">CMP RADIO <span class="live-indicator"></span></div>
+            <div class="nav-brand" id="btn-radio" onclick="switchPortal('radio')">CMP RADIO <span
+                    class="live-indicator"></span></div>
         </div>
         <div class="nav-group">
             <button class="btn-login" onclick="triggerAuth()">OS LOGIN</button>
@@ -134,7 +340,8 @@
             <div>
                 <span class="mono">EST. 2018 // 501(c)(3) NON-PROFIT</span>
                 <h1>Architecture of<br><span style="color:var(--accent-orange)">Community Power.</span></h1>
-                <p>CMP exists to build trusted community media infrastructure in Chester. We amplify authentic local narratives and create pathways for neighbors to inform, connect, and lead positive change.</p>
+                <p>CMP exists to build trusted community media infrastructure in Chester. We amplify authentic local
+                    narratives and create pathways for neighbors to inform, connect, and lead positive change.</p>
                 <div class="acronym-box">
                     <span class="mono">MISSION</span>
                     <span><strong>C</strong>onstantly <strong>M</strong>aking <strong>P</strong>rogress</span>
@@ -142,14 +349,18 @@
                 </div>
                 <button class="btn btn-fill" onclick="scrollToId('foundation-join')">Support The Mission</button>
             </div>
-            
+
             <div class="glass-card" style="border-left: 4px solid var(--accent-orange);">
                 <span class="mono">THE ORIGIN STORY</span>
-                <div class="quote-large">"Chester had a narrative controlled by outsiders, no platform for its own voice, and no organized framework for transforming pain into purpose."</div>
-                <p style="font-size: 0.9rem;">We solve the problem of disconnected communities lacking trusted information flow. We are the infrastructure for self-determination.</p>
+                <div class="quote-large">"Chester had a narrative controlled by outsiders, no platform for its own
+                    voice, and no organized framework for transforming pain into purpose."</div>
+                <p style="font-size: 0.9rem;">We solve the problem of disconnected communities lacking trusted
+                    information flow. We are the infrastructure for self-determination.</p>
                 <div style="margin-top: 2rem; display:flex; justify-content:space-between; align-items:center;">
-                    <div><span class="mono">Years Leading</span><strong style="font-size: 1.5rem; color:white;">8</strong></div>
-                    <div><span class="mono">Target Resources</span><strong style="font-size: 1.5rem; color:white;">$220k</strong></div>
+                    <div><span class="mono">Years Leading</span><strong
+                            style="font-size: 1.5rem; color:white;">8</strong></div>
+                    <div><span class="mono">Target Resources</span><strong
+                            style="font-size: 1.5rem; color:white;">$220k</strong></div>
                 </div>
             </div>
         </div>
@@ -157,10 +368,26 @@
         <div style="margin-bottom: 4rem;">
             <h2 style="margin-bottom: 2rem;">Core Pillars</h2>
             <div class="grid-4">
-                <div class="glass-card"><span class="tag">CORE</span><h3>Youth Media & Storytelling</h3><p style="font-size:0.9rem;">Building skills and positive identity. Includes podcasting workshops, sports broadcasting training, and the youth media lab.</p></div>
-                <div class="glass-card"><span class="tag">CORE</span><h3>Community Broadcasting</h3><p style="font-size:0.9rem;">Ongoing content that informs and elevates. Home of CMPRadio.net, local news coverage, and narrative programming.</p></div>
-                <div class="glass-card"><span class="tag">CORE</span><h3>Civic Literacy</h3><p style="font-size:0.9rem;">Increasing understanding of systems and politics. Includes "The Purple Room" and election night coverage.</p></div>
-                <div class="glass-card"><span class="tag">CORE</span><h3>Engagement & Events</h3><p style="font-size:0.9rem;">Place-based activation. Connecting families through "Fusion Fridays", wellness days, and block-based events.</p></div>
+                <div class="glass-card"><span class="tag">CORE</span>
+                    <h3>Youth Media & Storytelling</h3>
+                    <p style="font-size:0.9rem;">Building skills and positive identity. Includes podcasting workshops,
+                        sports broadcasting training, and the youth media lab.</p>
+                </div>
+                <div class="glass-card"><span class="tag">CORE</span>
+                    <h3>Community Broadcasting</h3>
+                    <p style="font-size:0.9rem;">Ongoing content that informs and elevates. Home of CMPRadio.net, local
+                        news coverage, and narrative programming.</p>
+                </div>
+                <div class="glass-card"><span class="tag">CORE</span>
+                    <h3>Civic Literacy</h3>
+                    <p style="font-size:0.9rem;">Increasing understanding of systems and politics. Includes "The Purple
+                        Room" and election night coverage.</p>
+                </div>
+                <div class="glass-card"><span class="tag">CORE</span>
+                    <h3>Engagement & Events</h3>
+                    <p style="font-size:0.9rem;">Place-based activation. Connecting families through "Fusion Fridays",
+                        wellness days, and block-based events.</p>
+                </div>
             </div>
         </div>
 
@@ -168,13 +395,18 @@
             <div class="grid-2">
                 <div>
                     <h2>Get Involved</h2>
-                    <p>We are looking for volunteers, board members, and technical operations staff. We thrive on structure, defined roles, and accountability without shame.</p>
+                    <p>We are looking for volunteers, board members, and technical operations staff. We thrive on
+                        structure, defined roles, and accountability without shame.</p>
                     <p class="mono">admin@cmpradiofoundation.org</p>
                 </div>
                 <form onsubmit="realSubmit(event, 'VOLUNTEER_INTEREST')">
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-bottom: 1rem;">
-                        <input type="text" placeholder="Name" style="padding:1rem; background:#111; border:1px solid #333; color:white; font-family:var(--font-head);" required>
-                        <input type="email" placeholder="Email" style="padding:1rem; background:#111; border:1px solid #333; color:white; font-family:var(--font-head);" required>
+                        <input type="text" placeholder="Name"
+                            style="padding:1rem; background:#111; border:1px solid #333; color:white; font-family:var(--font-head);"
+                            required>
+                        <input type="email" placeholder="Email"
+                            style="padding:1rem; background:#111; border:1px solid #333; color:white; font-family:var(--font-head);"
+                            required>
                     </div>
                     <button class="btn btn-fill" style="width:100%">Submit Interest</button>
                 </form>
@@ -185,64 +417,77 @@
     <div id="portal-radio" class="portal-view hidden">
         <div class="grid-2" style="margin-bottom: 6rem;">
             <div class="video-container">
-                <iframe src="https://www.youtube.com/embed?listType=playlist&list=UU6v127419131627&index=1" style="border:0;" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed?listType=playlist&list=UUbV7zxapnDjl8aYNrMhNHyA"
+                    style="border:0;" allowfullscreen></iframe>
+
                 <div style="position:absolute; bottom:20px; left:20px; pointer-events:none;">
-                   <span style="background:red; color:white; padding: 3px 8px; font-size:0.7rem; font-weight:bold; border-radius:2px; font-family:var(--font-mono);">LIVE</span>
+                    <span
+                        style="background:red; color:white; padding: 3px 8px; font-size:0.7rem; font-weight:bold; border-radius:2px; font-family:var(--font-mono);">LATEST</span>
                 </div>
             </div>
-            
+
             <div style="padding-left: 1rem; display:flex; flex-direction:column; justify-content:center;">
                 <span class="mono">NOW STREAMING</span>
                 <h1>The Voice of<br><span style="color:var(--accent-orange)">Chester.</span></h1>
-                <p>Unapologetic community radio. We do not silence opinions or lived experiences, even if they are uncomfortable. The only line we draw is at harm or hate.</p>
+                <p>Unapologetic community radio. We do not silence opinions or lived experiences, even if they are
+                    uncomfortable. The only line we draw is at harm or hate.</p>
                 <div class="acronym-box">
                     <span class="mono">STATION ID</span>
                     <span><strong>C</strong>hester <strong>M</strong>ade <strong>P</strong>roducts</span>
                     <span><strong>C</strong>hanging <strong>M</strong>edia's <strong>P</strong>erspective</span>
                 </div>
                 <div style="display:flex; gap:1rem;">
-                    <a href="https://www.youtube.com/@cmpradio6904/live" target="_blank" class="btn btn-fill">Open YouTube App</a>
+                    <a href="https://www.youtube.com/@cmpradio6904/live" target="_blank" class="btn btn-fill">Open
+                        YouTube App</a>
                 </div>
             </div>
         </div>
-        
+
         <div class="glass-card" style="margin-bottom: 4rem;">
             <h2>Featured Shows</h2>
-             <div class="grid-4">
+            <div class="grid-4">
                 <div class="glass-card" style="padding:0; transition: transform 0.2s;">
-                    <div style="height:150px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
+                    <div
+                        style="height:150px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
                         <span style="font-size:2rem; filter: grayscale(100%);">🎙️</span>
                     </div>
                     <div style="padding: 1.5rem;">
                         <h3>The Voice No Chill</h3>
-                        <p style="font-size:0.8rem; margin-bottom: 1rem;">Raw, unfiltered conversations about what's really happening on the blocks.</p>
+                        <p style="font-size:0.8rem; margin-bottom: 1rem;">Raw, unfiltered conversations about what's
+                            really happening on the blocks.</p>
                     </div>
                 </div>
                 <div class="glass-card" style="padding:0;">
-                    <div style="height:150px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
+                    <div
+                        style="height:150px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
                         <span style="font-size:2rem; filter: grayscale(100%);">💜</span>
                     </div>
                     <div style="padding: 1.5rem;">
                         <h3>The Purple Room</h3>
-                        <p style="font-size:0.8rem; margin-bottom: 1rem;">Politics explained for the community. Civic literacy in plain English.</p>
+                        <p style="font-size:0.8rem; margin-bottom: 1rem;">Politics explained for the community. Civic
+                            literacy in plain English.</p>
                     </div>
                 </div>
                 <div class="glass-card" style="padding:0;">
-                    <div style="height:150px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
+                    <div
+                        style="height:150px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
                         <span style="font-size:2rem; filter: grayscale(100%);">💬</span>
                     </div>
                     <div style="padding: 1.5rem;">
                         <h3>Uncomfortable Convos</h3>
-                        <p style="font-size:0.8rem; margin-bottom: 1rem;">We lean into the hard topics that others ignore.</p>
+                        <p style="font-size:0.8rem; margin-bottom: 1rem;">We lean into the hard topics that others
+                            ignore.</p>
                     </div>
                 </div>
-                 <div class="glass-card" style="padding:0;">
-                    <div style="height:150px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
+                <div class="glass-card" style="padding:0;">
+                    <div
+                        style="height:150px; background: #1a1a1a; display:flex; align-items:center; justify-content:center; border-bottom:1px solid #333;">
                         <span style="font-size:2rem; filter: grayscale(100%);">✨</span>
                     </div>
                     <div style="padding: 1.5rem;">
                         <h3>Project Engage</h3>
-                        <p style="font-size:0.8rem; margin-bottom: 1rem;">Youth + Elders storytelling. Bridging the gap.</p>
+                        <p style="font-size:0.8rem; margin-bottom: 1rem;">Youth + Elders storytelling. Bridging the gap.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -251,7 +496,8 @@
 
     <footer>
         <p>&copy; 2026 CMP Foundation (501c3). All Rights Reserved.</p>
-        <p class="mono"><a href="https://www.cmpradiofoundation.org" style="color:#666;">www.cmpradiofoundation.org</a></p>
+        <p class="mono"><a href="https://www.cmpradiofoundation.org" style="color:#666;">www.cmpradiofoundation.org</a>
+        </p>
     </footer>
 
     <script type="module">
@@ -354,4 +600,5 @@
 
     </script>
 </body>
+
 </html>

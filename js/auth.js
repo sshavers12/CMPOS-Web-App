@@ -9,14 +9,25 @@ export async function login() {
         const user = result.user;
         console.log("CMPOS Auth Success:", user.email);
 
-        // Copy token simply to prove action
-        const token = await user.getIdToken();
-        navigator.clipboard.writeText(token);
+        // Initializing Dashboard System
+        import('./dashboard.js');
+        import('./intelligence.js');
 
-        alert(`WELCOME AGENT: ${user.email}\n\nSession Token Copied to Clipboard.`);
+        // Wait slightly for modules then launch
+        setTimeout(() => {
+            if (window.dashboard) {
+                document.getElementById('global-nav').classList.add('hidden');
+                document.getElementById('portal-foundation').classList.add('hidden');
+                document.getElementById('portal-radio').classList.add('hidden');
+                document.querySelector('footer').classList.add('hidden');
+
+                // Launch
+                window.dashboard.init(user);
+            }
+        }, 500);
+
         return user;
     } catch (error) {
         console.error("CMPOS Auth Error:", error.message);
-        // Silent fail as per requirements (console only logs)
     }
 }
