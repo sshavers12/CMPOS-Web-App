@@ -331,7 +331,7 @@
                     class="live-indicator"></span></div>
         </div>
         <div class="nav-group">
-            <button class="btn-login" onclick="triggerAuth()">OS LOGIN</button>
+            <button id="btn-login" class="btn-login">OS LOGIN</button>
         </div>
     </nav>
 
@@ -500,105 +500,11 @@
         </p>
     </footer>
 
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-      import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    <!-- DASHBOARD CONTAINER -->
+    <div id="dashboard-container" class="hidden"></div>
 
-      // 1. BACKEND API (Apps Script)
-      const API_URL = "https://script.google.com/macros/s/AKfycby469tBOVlC0ods6AiLeq8M06EfZ2PGJyk47kfGcdlgUIL7bAWAKmo-vPjsqBUxI-IB/exec"; 
-      
-      // 2. FIREBASE CONFIG (PASTE YOURS HERE!)
-      const firebaseConfig = {
-        apiKey: "YOUR_API_KEY_GOES_HERE",
-        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-        projectId: "YOUR_PROJECT_ID",
-        storageBucket: "YOUR_PROJECT_ID.appspot.com",
-        messagingSenderId: "SENDER_ID",
-        appId: "APP_ID"
-      };
-
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const provider = new GoogleAuthProvider();
-
-      // 3. AUTHORIZED USERS
-      const AUTHORIZED_USERS = {
-        "samshavers@kingdomcommunications.net": { role: "SUPER_ADMIN", key: "## ADMIN-ALPHA-99 ##" },
-        "info@cmpradio.net":                    { role: "SUPER_ADMIN", key: "## ADMIN-ALPHA-99 ##" },
-        "sshavers@me.com":                      { role: "PARTNER",     key: "## PARTNER-BRAVO-77 ##" },
-        "illadelphia06@gmail.com":              { role: "VOLUNTEER",   key: "## VOL-CHARLIE-33 ##" }
-      };
-
-      // 4. LOGIN FUNCTION
-      window.triggerAuth = async () => {
-        try {
-          const result = await signInWithPopup(auth, provider);
-          const email = result.user.email.toLowerCase();
-          
-          if (AUTHORIZED_USERS[email]) {
-            const user = AUTHORIZED_USERS[email];
-            navigator.clipboard.writeText(user.key);
-            alert(`SUCCESS: ${user.role}\n\n1. Key Copied: ${user.key}\n2. Paste it in the chat to unlock.`);
-            window.open("https://aistudio.google.com/app/prompts/new_chat", "_blank");
-          } else {
-            alert(`ACCESS DENIED: ${email} is not authorized.`);
-            await signOut(auth);
-          }
-        } catch (error) {
-          console.error(error);
-          alert("Login Failed. Did you add your URL to Authorized Domains in Firebase?\n\nError: " + error.message);
-        }
-      };
-
-      // 5. SUBMIT FUNCTION
-      window.realSubmit = async (e, type) => {
-        e.preventDefault();
-        const btn = e.target.querySelector('button');
-        const inputs = e.target.querySelectorAll('input, textarea');
-        const originalText = btn.innerText;
-        btn.innerText = "CONNECTING...";
-        btn.style.opacity = "0.7";
-
-        const data = {
-            action: 'submitIntake', type: type,
-            name: inputs[0].value, email: inputs[1].value,
-            message: inputs[2] ? inputs[2].value : "N/A"
-        };
-
-        try {
-            await fetch(API_URL, {
-                method: "POST", mode: "no-cors", 
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            });
-            btn.innerText = "SUCCESS"; btn.style.background = "#4CAF50"; e.target.reset();
-            setTimeout(() => { btn.innerText = originalText; btn.style.background = "#FF6700"; btn.style.opacity = "1"; }, 3000);
-        } catch (error) {
-            btn.innerText = "ERROR"; btn.style.background = "red";
-        }
-      };
-
-      // 6. PORTAL SWITCHER
-      window.switchPortal = (portal) => {
-        document.getElementById('btn-foundation').classList.remove('active');
-        document.getElementById('btn-radio').classList.remove('active');
-        document.getElementById(`btn-${portal}`).classList.add('active');
-        if(portal === 'foundation') {
-            document.getElementById('portal-foundation').classList.remove('hidden');
-            document.getElementById('portal-radio').classList.add('hidden');
-            document.body.style.backgroundColor = "#050505"; 
-        } else {
-            document.getElementById('portal-radio').classList.remove('hidden');
-            document.getElementById('portal-foundation').classList.add('hidden');
-            document.body.style.backgroundColor = "#080808"; 
-        }
-        window.scrollTo(0,0);
-      };
-
-      window.scrollToId = (id) => { document.getElementById(id).scrollIntoView({behavior: 'smooth'}); };
-      window.switchPortal('foundation'); // Start at foundation
-
-    </script>
+    <!-- MAIN APP MODULE -->
+    <script type="module" src="./js/app.js"></script>
 </body>
 
 </html>
