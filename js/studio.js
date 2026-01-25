@@ -1,36 +1,44 @@
-export class Dashboard {
+console.log("MODULE: studio.js loaded");
+
+export class Studio {
     constructor() {
         this.container = document.getElementById('dashboard-container');
-        this.sidebar = document.getElementById('studio-sidebar');
-        this.stage = document.getElementById('main-stage');
+        // Elements queried dynamically after render
         this.currentUser = null;
     }
 
-    init(user) {
-        alert("DEBUG: Dashboard Module Initialized for " + user.email);
-        console.log("DASHBOARD: Starting Render...");
+    // ... existing methods ...
 
-        try {
-            this.currentUser = user;
-            this.renderLayout();
+}
 
-            // Force Visibility (Aggressive)
-            this.container.classList.remove('hidden');
-            this.container.style.display = 'flex';
-            this.container.style.zIndex = '9999';
+// Global Access
+window.studio = new Studio();
 
-            console.log("DASHBOARD: Layout Rendered. Container Unhidden.");
-            this.loadView('executive');
-        } catch (e) {
-            alert("DASHBOARD CRASHED: " + e.message);
-            console.error(e);
-        }
+init(user) {
+    alert("DEBUG: Dashboard Module Initialized for " + user.email);
+    console.log("DASHBOARD: Starting Render...");
+
+    try {
+        this.currentUser = user;
+        this.renderLayout();
+
+        // Force Visibility (Aggressive)
+        this.container.classList.remove('hidden');
+        this.container.style.display = 'flex';
+        this.container.style.zIndex = '9999';
+
+        console.log("DASHBOARD: Layout Rendered. Container Unhidden.");
+        this.loadView('executive');
+    } catch (e) {
+        alert("DASHBOARD CRASHED: " + e.message);
+        console.error(e);
     }
+}
 
-    renderLayout() {
-        // Clear existing body content (leaving container)
-        // Note: Ideally we toggle visibility, but for "Studio Mode" we overlay
-        this.container.innerHTML = `
+renderLayout() {
+    // Clear existing body content (leaving container)
+    // Note: Ideally we toggle visibility, but for "Studio Mode" we overlay
+    this.container.innerHTML = `
             <div id="studio-layout">
                 <aside id="sidebar">
                     <div class="brand">CMP OS</div>
@@ -52,33 +60,33 @@ export class Dashboard {
                 <div id="intel-panel" class="closed"></div>
             </div>
         `;
-    }
+}
 
-    loadView(viewName) {
-        const stage = document.getElementById('stage');
-        stage.innerHTML = '<div class="loading">Loading OS Module...</div>';
+loadView(viewName) {
+    const stage = document.getElementById('stage');
+    stage.innerHTML = '<div class="loading">Loading OS Module...</div>';
 
-        // Broadcast event for Intelligence Layer
-        const event = new CustomEvent('viewChange', { detail: { view: viewName } });
-        document.dispatchEvent(event);
+    // Broadcast event for Intelligence Layer
+    const event = new CustomEvent('viewChange', { detail: { view: viewName } });
+    document.dispatchEvent(event);
 
-        setTimeout(() => {
-            switch (viewName) {
-                case 'executive':
-                    this.renderExecutive(stage);
-                    break;
-                case 'radio':
-                    this.renderRadio(stage);
-                    break;
-                case 'ops':
-                    this.renderOps(stage);
-                    break;
-            }
-        }, 300); // Simulate processing
-    }
+    setTimeout(() => {
+        switch (viewName) {
+            case 'executive':
+                this.renderExecutive(stage);
+                break;
+            case 'radio':
+                this.renderRadio(stage);
+                break;
+            case 'ops':
+                this.renderOps(stage);
+                break;
+        }
+    }, 300); // Simulate processing
+}
 
-    renderExecutive(target) {
-        target.innerHTML = `
+renderExecutive(target) {
+    target.innerHTML = `
             <header class="stage-header">
                 <h2>Executive Overview</h2>
                 <div class="date">${new Date().toLocaleDateString()}</div>
@@ -105,10 +113,10 @@ export class Dashboard {
                 </div>
             </div>
         `;
-    }
+}
 
-    renderRadio(target) {
-        target.innerHTML = `
+renderRadio(target) {
+    target.innerHTML = `
             <header class="stage-header">
                 <h2>Radio Operations</h2>
                 <div class="status live">ON AIR</div>
@@ -133,10 +141,10 @@ export class Dashboard {
                 </div>
             </div>
         `;
-    }
+}
 
-    renderOps(target) {
-        target.innerHTML = `
+renderOps(target) {
+    target.innerHTML = `
              <header class="stage-header">
                 <h2>Internal Operations</h2>
             </header>
@@ -148,8 +156,8 @@ export class Dashboard {
                 </div>
             </div>
         `;
-    }
+}
 }
 
 // Global Access
-window.dashboard = new Dashboard();
+window.studio = new Studio();
