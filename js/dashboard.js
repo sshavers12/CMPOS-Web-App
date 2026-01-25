@@ -9,6 +9,7 @@ export class Dashboard {
     init(user) {
         this.currentUser = user;
         this.renderLayout();
+        this.container.classList.remove('hidden'); // Fix: Make visible
         this.loadView('executive'); // Default view
     }
 
