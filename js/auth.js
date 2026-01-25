@@ -10,21 +10,24 @@ export async function login() {
         console.log("CMPOS Auth Success:", user.email);
 
         // Initializing Dashboard System
-        import('./dashboard.js');
-        import('./intelligence.js');
+        // Initializing Dashboard System
+        console.log("Loading Studio Modules...");
+        await import('./dashboard.js');
+        await import('./intelligence.js');
 
-        // Wait slightly for modules then launch
-        setTimeout(() => {
-            if (window.dashboard) {
-                document.getElementById('global-nav').classList.add('hidden');
-                document.getElementById('portal-foundation').classList.add('hidden');
-                document.getElementById('portal-radio').classList.add('hidden');
-                document.querySelector('footer').classList.add('hidden');
+        if (window.dashboard) {
+            console.log("Launching Dashboard...");
+            document.getElementById('global-nav').classList.add('hidden');
+            document.getElementById('portal-foundation').classList.add('hidden');
+            document.getElementById('portal-radio').classList.add('hidden');
+            document.querySelector('footer').classList.add('hidden');
 
-                // Launch
-                window.dashboard.init(user);
-            }
-        }, 500);
+            // Launch
+            window.dashboard.init(user);
+        } else {
+            console.error("Dashboard Module Failed to Load");
+            alert("System Error: Dashboard module missing.");
+        }
 
         return user;
     } catch (error) {
