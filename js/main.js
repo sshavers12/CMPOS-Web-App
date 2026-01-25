@@ -1,4 +1,4 @@
-import { login } from "./auth.js";
+import { login } from "./gatekeeper.js";
 import { loadLatestVideos } from "./youtube.js";
 
 document.addEventListener("DOMContentLoaded", () => {
