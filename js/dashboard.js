@@ -7,10 +7,24 @@ export class Dashboard {
     }
 
     init(user) {
-        this.currentUser = user;
-        this.renderLayout();
-        this.container.classList.remove('hidden'); // Fix: Make visible
-        this.loadView('executive'); // Default view
+        alert("DEBUG: Dashboard Module Initialized for " + user.email);
+        console.log("DASHBOARD: Starting Render...");
+
+        try {
+            this.currentUser = user;
+            this.renderLayout();
+
+            // Force Visibility (Aggressive)
+            this.container.classList.remove('hidden');
+            this.container.style.display = 'flex';
+            this.container.style.zIndex = '9999';
+
+            console.log("DASHBOARD: Layout Rendered. Container Unhidden.");
+            this.loadView('executive');
+        } catch (e) {
+            alert("DASHBOARD CRASHED: " + e.message);
+            console.error(e);
+        }
     }
 
     renderLayout() {
