@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Frame } from "@/components/site/Frame";
 import { LinkButton } from "@/components/site/Buttons";
-import { PourIllustration } from "@/components/site/PourIllustration";
+import { BadgeLogo } from "@/components/site/Logo";
 import { ArrowDown, ArrowRight } from "@/components/site/Icons";
 import { CtaBand } from "@/components/site/CtaBand";
 import { StructuredData } from "@/components/site/StructuredData";
@@ -16,7 +16,7 @@ const SCHEMA = JSON.stringify({
       "@id": `${SITE_URL}/#business`,
       name: "Confident Concrete",
       url: SITE_URL,
-      logo: `${SITE_URL}/logo-mark.svg`,
+      logo: `${SITE_URL}/brand/logo-badge-560.png`,
       image: `${SITE_URL}/og.png`,
       slogan: "We’re pouring with confidence.",
       description:
@@ -76,7 +76,7 @@ function HomePage() {
             </div>
           </div>
           <div className="hero__art">
-            <PourIllustration />
+            <BadgeLogo className="badge" width={480} priority />
           </div>
         </div>
         <div className="facts">

@@ -1,13 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import { BUSINESS, NAV, START_LINKS } from "@/lib/site/content";
-import { Lockup } from "./Logo";
+import { BadgeLogo } from "./Logo";
 
 export function Footer() {
   return (
     <footer className="site-footer on-dark">
       <div className="container site-footer__grid">
         <div className="site-footer__brand">
-          <Lockup variant="light" size="large" />
+          <Link to="/" aria-label="Confident Concrete, home">
+            <BadgeLogo className="badge badge--footer" width={240} />
+          </Link>
           <p className="site-footer__slogan">{BUSINESS.slogan}</p>
           <p>
             {BUSINESS.founder}, {BUSINESS.founderRole.toLowerCase()}. {BUSINESS.city}. {BUSINESS.county}.
@@ -33,8 +35,7 @@ export function Footer() {
       </div>
       <div className="container site-footer__notes">
         <p>
-          Phone and email will be published here once Zane approves them. The chute mark is a review concept and is
-          pending Zane Walker’s approval.
+          Phone and email will be published here once Zane approves them.
         </p>
         <p>© 2026 {BUSINESS.name}</p>
       </div>

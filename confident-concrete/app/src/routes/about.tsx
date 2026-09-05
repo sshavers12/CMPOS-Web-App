@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Frame, Intro } from "@/components/site/Frame";
 import { CtaBand } from "@/components/site/CtaBand";
-import { ChuteMark } from "@/components/site/Logo";
+import { BadgeLogo, Monogram } from "@/components/site/Logo";
 import { ArrowRight } from "@/components/site/Icons";
 import { BUSINESS } from "@/lib/site/content";
 import { pageHead } from "@/lib/site/seo";
@@ -95,27 +95,34 @@ function AboutPage() {
         <div className="container two-col two-col--even">
           <div className="prose">
             <p className="label">The mark</p>
-            <h2>A chute that pours the name.</h2>
+            <h2>A chute, a bridge, a finished slab.</h2>
             <p>
-              Zane described the logo he wanted: the rear half of a concrete truck chute, with Confident Concrete
-              appearing to pour from it. The mark on this site is a refined version of that idea, drawn in one color
-              so it works on a shirt, an invoice and a truck door.
+              The Confident Concrete badge puts the work and the place in one mark: a finisher walking a fresh pour,
+              the mixer chute running, and the river bridge at sunset. It is the logo Zane approved, and it is the
+              logo this site uses.
             </p>
             <p>
-              It is a review concept. Zane Walker has the final say on the logo, and it will be updated the moment he
-              approves a direction. Black and white remain the master colors of the logo itself.
+              Orange and steel carry the brand. The compact CC monogram is drawn from the same badge for small
+              places, the browser tab, a shirt chest, a stamp on an invoice.
+            </p>
+            <p className="small muted">
+              Badge lockup: {BUSINESS.city.replace(", Pennsylvania", ", PA")}. {BUSINESS.logoTagline}
             </p>
           </div>
           <div className="logo-plate">
+            <div className="logo-plate__badge">
+              <BadgeLogo className="badge" width={340} />
+            </div>
             <div className="logo-plate__masters">
               <div className="logo-plate__master logo-plate__master--light">
-                <ChuteMark className="w-24" chute="#1a1a19" pour="#1a1a19" title="Chute mark, black on white" />
+                <Monogram front="var(--ink)" keyline="var(--white)" title="CC monogram on a light ground" />
+                <span>On light</span>
               </div>
               <div className="logo-plate__master logo-plate__master--dark">
-                <ChuteMark className="w-24" chute="#edeae4" pour="#edeae4" title="Chute mark, white on black" />
+                <Monogram front="var(--brand-silver)" keyline="var(--ink)" title="CC monogram on a dark ground" />
+                <span>On dark</span>
               </div>
             </div>
-            <p className="small muted">Review concept, pending Zane Walker’s approval.</p>
           </div>
         </div>
       </section>

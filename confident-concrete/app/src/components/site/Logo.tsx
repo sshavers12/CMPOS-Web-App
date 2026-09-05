@@ -1,49 +1,111 @@
 import { Link } from "@tanstack/react-router";
+import { useId } from "react";
 
-type MarkProps = {
+type MonogramProps = {
   className?: string;
-  /** Color of the chute. Defaults to currentColor so masters stay one color. */
-  chute?: string;
-  /** Color of the pour and slab. Defaults to currentColor. */
-  pour?: string;
+  /** Colour of the rear C. Defaults to the brand orange. */
+  back?: string;
+  /** Colour of the front C. Silver on dark grounds, ink on light ones. */
+  front?: string;
+  /** Thin separator drawn behind the front C so the two letters stay distinct. */
+  keyline?: string;
   title?: string;
 };
 
 /**
- * The Confident Concrete chute mark. Review concept, pending Zane Walker's
- * approval: the rear half of a mixer chute pours a controlled stream into a slab
- * that becomes the baseline of the name.
+ * The Confident Concrete CC monogram, redrawn as vector from the approved badge
+ * logo so it stays sharp in the header, the favicon and print. The full badge is
+ * the primary logo; this is the compact mark for small sizes.
  */
-export function ChuteMark({ className, chute = "currentColor", pour = "currentColor", title }: MarkProps) {
+export function Monogram({
+  className,
+  back = "var(--brand-orange)",
+  front = "var(--brand-silver)",
+  keyline = "var(--ink)",
+  title,
+}: MonogramProps) {
+  const id = useId().replace(/:/g, "");
+  const mask = `cc-${id}`;
+  const c = (fill: string) => (
+    <g mask={`url(#${mask})`}>
+      <rect x="-6" y="-6" width="116" height="116" fill={fill} />
+    </g>
+  );
   return (
     <svg
       className={className}
-      viewBox="0 0 100 100"
+      viewBox="0 0 162 138"
       role={title ? "img" : "presentation"}
       aria-hidden={title ? undefined : true}
       focusable="false"
     >
       {title ? <title>{title}</title> : null}
-      <path
-        d="M6 22 L38 36 L62 50 L74 60"
-        fill="none"
-        stroke={chute}
-        strokeWidth="10"
-        strokeLinejoin="miter"
-        strokeLinecap="butt"
-      />
-      <path d="M69 63 L80 63 L86 82 L64 82 Z" fill={pour} />
-      <path d="M22 82 H94 V92 H12 Z" fill={pour} />
+      <defs>
+        <mask id={mask} maskUnits="userSpaceOnUse" x="-6" y="-6" width="116" height="116">
+          <rect x="-6" y="-6" width="116" height="116" fill="black" />
+          <rect x="0" y="0" width="100" height="100" rx="27" fill="white" />
+          <rect x="27" y="27" width="46" height="46" rx="13" fill="black" />
+          <rect x="50" y="39" width="58" height="22" rx="6" fill="black" />
+        </mask>
+      </defs>
+      {c(back)}
+      <g transform="translate(62 38)">
+        {keyline ? <g transform="translate(-4 -4) scale(1.08)">{c(keyline)}</g> : null}
+        {c(front)}
+      </g>
     </svg>
   );
 }
 
-type LockupProps = {
-  variant?: "dark" | "light";
-  size?: "default" | "large";
-  asLink?: boolean;
+type BadgeProps = {
+  /** Rendered width in CSS pixels. Picks the right source set. */
+  width?: number;
   className?: string;
+  priority?: boolean;
+  alt?: string;
 };
+
+/**
+ * The primary Confident Concrete badge logo, supplied by the owner.
+ * Transparent background, so it sits on the cement and charcoal grounds alike.
+ */
+export function BadgeLogo({
+  width = 560,
+  className,
+  priority = false,
+  alt = "Confident Concrete. Chester, Pennsylvania. Strong foundations, brighter tomorrow.",
+}: BadgeProps) {
+  const large = width > 300;
+  return (
+    <picture>
+      <source
+        type="image/webp"
+        srcSet={
+          large
+            ? "/brand/logo-badge-560.webp 560w, /brand/logo-badge-1120.webp 1120w"
+            : "/brand/logo-badge-260.webp 260w, /brand/logo-badge-560.webp 560w"
+        }
+        sizes={`${width}px`}
+      />
+      <img
+        className={className}
+        src={large ? "/brand/logo-badge-560.png" : "/brand/logo-badge-260.png"}
+        srcSet={
+          large
+            ? "/brand/logo-badge-560.png 560w, /brand/logo-badge-1120.png 1120w"
+            : "/brand/logo-badge-260.png 260w, /brand/logo-badge-560.png 560w"
+        }
+        sizes={`${width}px`}
+        width={1254}
+        height={1227}
+        alt={alt}
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : undefined}
+        decoding={priority ? "sync" : "async"}
+      />
+    </picture>
+  );
+}
 
 export function Wordmark() {
   return (
@@ -54,18 +116,26 @@ export function Wordmark() {
   );
 }
 
+type LockupProps = {
+  variant?: "dark" | "light";
+  size?: "default" | "large";
+  asLink?: boolean;
+  className?: string;
+};
+
+/** Compact header and footer lockup: CC monogram beside the stacked wordmark. */
 export function Lockup({ variant = "dark", size = "default", asLink = true, className = "" }: LockupProps) {
-  const classes = [
-    "brand",
-    variant === "light" ? "brand--light" : "",
-    size === "large" ? "brand--large" : "",
-    className,
-  ]
+  const onDark = variant === "light";
+  const classes = ["brand", onDark ? "brand--light" : "", size === "large" ? "brand--large" : "", className]
     .filter(Boolean)
     .join(" ");
   const inner = (
     <>
-      <ChuteMark className="brand__mark" />
+      <Monogram
+        className="brand__mark"
+        front={onDark ? "var(--brand-silver)" : "var(--ink)"}
+        keyline={onDark ? "var(--ink)" : "var(--cement)"}
+      />
       <Wordmark />
     </>
   );

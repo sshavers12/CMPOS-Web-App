@@ -5,6 +5,7 @@ export const BUSINESS = {
   city: "Chester, Pennsylvania",
   county: "Delaware County",
   slogan: "We’re pouring with confidence.",
+  logoTagline: "Strong foundations. Brighter tomorrow.",
   years: "37",
 } as const;
 

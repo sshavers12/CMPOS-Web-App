@@ -3,23 +3,20 @@
 html,body{margin:0}
 body{width:1200px;height:630px;background:#1a1a19;color:#edeae4;font-family:Archivo,system-ui,sans-serif;position:relative;overflow:hidden}
 .grain{position:absolute;inset:0;opacity:.35;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.85 0 0 0 0 0.83 0 0 0 0 0.78 0 0 0 0.16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.line{position:absolute;left:0;right:0;height:1px;background:#3e3d39}
-.wrap{position:absolute;left:72px;top:56px;right:72px;bottom:112px;display:grid;grid-template-columns:1fr 420px;gap:40px;align-items:center}
-.brand{display:flex;align-items:center;gap:18px;margin-bottom:34px}
-.brand svg{width:64px;height:64px}
-.word{font-weight:800;font-stretch:80%;letter-spacing:.06em;text-transform:uppercase;font-size:26px;line-height:1}
-h1{margin:0;font-size:92px;line-height:.98;font-weight:800;font-stretch:87.5%;letter-spacing:-.02em;max-width:640px}
-p{margin:26px 0 0;font-size:26px;line-height:1.35;color:#b5b0a6;max-width:600px}
-.loc{position:absolute;left:72px;bottom:56px;font-size:20px;letter-spacing:.08em;text-transform:uppercase;color:#b5b0a6;font-weight:600}
-.art{justify-self:end}
+.wrap{position:absolute;left:72px;top:0;right:72px;bottom:0;display:grid;grid-template-columns:1fr 470px;gap:48px;align-items:center}
+h1{margin:0;font-size:84px;line-height:.98;font-weight:800;font-stretch:87.5%;letter-spacing:-.02em;max-width:560px}
+p{margin:26px 0 0;font-size:25px;line-height:1.4;color:#b5b0a6;max-width:540px}
+.loc{margin:34px 0 0;font-size:19px;letter-spacing:.1em;text-transform:uppercase;color:#f26b1d;font-weight:700}
+.badge{justify-self:end}
+.badge img{width:470px;height:auto;display:block;filter:drop-shadow(0 20px 44px rgba(0,0,0,.5))}
 </style></head><body>
-<div class="grain"></div><div class="line" style="top:452px"></div><div class="line" style="top:490px"></div>
-<div class="wrap"><div>
-<div class="brand"><svg viewBox="0 0 100 100"><path d="M6 22 L38 36 L62 50 L74 60" fill="none" stroke="#edeae4" stroke-width="10"/><path d="M69 63 L80 63 L86 82 L64 82 Z" fill="#edeae4"/><path d="M22 82 H94 V92 H12 Z" fill="#edeae4"/></svg><div class="word">Confident<br>Concrete</div></div>
+<div class="grain"></div>
+<div class="wrap">
+<div>
 <h1>We’re pouring with confidence.</h1>
 <p>Concrete led by Zane Walker and roughly 37 years in the trade.</p>
+<p class="loc">Chester, Pennsylvania · Delaware County</p>
 </div>
-<svg class="art" viewBox="0 0 400 320" width="420" height="336"><path d="M20 40 L150 100 L240 150 L302 190" fill="none" stroke="#b8401a" stroke-width="28"/><circle cx="150" cy="100" r="5.5" fill="#1a1a19" stroke="#edeae4" stroke-width="2"/><circle cx="240" cy="150" r="5.5" fill="#1a1a19" stroke="#edeae4" stroke-width="2"/><path d="M290 190 L316 190 L326 262 L280 262 Z" fill="#d6d1c7"/><path d="M110 262 H372 V292 H90 Z" fill="#d6d1c7"/></svg>
+<div class="badge"><img src="file:///home/user/CMPOS-Web-App/confident-concrete/app/public/brand/logo-badge-1120.png"></div>
 </div>
-<div class="loc">Chester, Pennsylvania · Delaware County</div>
 </body></html>

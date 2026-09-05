@@ -46,9 +46,17 @@
   --rule: #c9c4ba;
   --rule-strong: #a9a49a;
   --rule-dark: #3e3d39;
-  --accent: #b8401a;
+  /* Brand colours sampled from the approved Confident Concrete badge logo. */
+  --brand-orange: #f26b1d;
+  --brand-orange-deep: #d24c08;
+  --brand-silver: #e6e9e7;
+  --brand-steel: #b0aeb1;
+  /* Interactive orange. Deepened so white button labels clear WCAG AA on light
+     grounds; the true brand orange is used for graphics and for text on dark. */
+  --accent: #c2450f;
   --accent-hover: #a63612;
-  --accent-soft: #f2dcd2;
+  --accent-soft: #f7ddcd;
+  --accent-on-dark: #f26b1d;
   --pour: #d6d1c7;
   --white: #ffffff;
 
@@ -133,6 +141,13 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 
 /* Tone helpers ------------------------------------------------------ */
 .on-dark { background: var(--ink); color: var(--cement); }
+/* The primary button stays one colour everywhere. On dark grounds the brighter
+   brand orange is used for accents that are text, where it is legible. */
+.on-dark .ledger__num,
+.on-dark .link-btn,
+.on-dark .accent-text { color: var(--accent-on-dark); }
+.on-dark .notice { border-left-color: var(--accent-on-dark); }
+.on-dark .notice svg { color: var(--accent-on-dark); }
 .on-dark .muted { color: var(--muted-dark); }
 .on-slab { background: var(--slab); }
 .muted { color: var(--muted); }
@@ -160,14 +175,14 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
 }
 .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); flex: 0 0 auto; }
-.brand__mark { width: 2.25rem; height: 2.25rem; flex: 0 0 auto; }
+.brand__mark { width: 2.6rem; height: auto; flex: 0 0 auto; }
 .brand__word {
   display: grid; line-height: 1;
   font-weight: 800; font-stretch: 80%; letter-spacing: 0.06em; text-transform: uppercase;
   font-size: 0.9rem;
 }
 .brand--light { color: var(--cement); }
-.brand--large .brand__mark { width: 3rem; height: 3rem; }
+.brand--large .brand__mark { width: 3.4rem; }
 .brand--large .brand__word { font-size: 1.2rem; }
 
 .nav-desktop { display: none; align-items: center; gap: 0.25rem 1.75rem; }
@@ -267,8 +282,7 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 .hero__copy { display: grid; gap: 1.25rem; }
 .hero__copy h1 { max-width: 12ch; }
 .hero__copy .lead { max-width: 34rem; color: var(--muted-dark); }
-.hero__art { width: 100%; max-width: 34rem; margin-inline: auto; }
-.hero__art svg { width: 100%; height: auto; }
+.hero__art { width: 100%; max-width: 30rem; margin-inline: auto; }
 @media (min-width: 56.25em) {
   .hero__grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: 3rem; }
   .hero__art { margin-inline: 0 0; justify-self: end; }
@@ -290,15 +304,11 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
   .facts__item:last-child { border-right: 0; padding-right: 0; }
 }
 
-/* Pour illustration motion ----------------------------------------- */
-.pour__stream { transform-origin: 300px 190px; transform-box: view-box; }
-.pour__slab { transform-origin: 300px 262px; transform-box: view-box; }
-@media (prefers-reduced-motion: no-preference) {
-  .pour--animate .pour__stream { animation: pour-stream 700ms var(--ease) 250ms both; }
-  .pour--animate .pour__slab { animation: pour-slab 800ms var(--ease) 800ms both; }
-}
-@keyframes pour-stream { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-@keyframes pour-slab { from { transform: scaleX(0.05); opacity: 0.6; } to { transform: scaleX(1); opacity: 1; } }
+/* Badge logo ------------------------------------------------------- */
+.badge { width: 100%; max-width: 27rem; margin-inline: auto; }
+.badge img { width: 100%; height: auto; }
+.hero .badge { filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.45)); }
+.badge--footer { max-width: 15rem; margin-inline: 0; }
 
 /* Sections ---------------------------------------------------------- */
 .section { padding-block: var(--section); }
@@ -400,7 +410,7 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 /* Footer ------------------------------------------------------------ */
 .site-footer { border-top: 1px solid var(--rule-dark); }
 .site-footer__grid { display: grid; gap: 2.5rem; padding-block: 3.5rem 2.5rem; }
-.site-footer__brand { display: grid; gap: 1rem; }
+.site-footer__brand { display: grid; gap: 1.25rem; justify-items: start; }
 .site-footer__brand p { max-width: 24rem; color: var(--muted-dark); }
 .site-footer__slogan { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.1rem); font-weight: 800; font-stretch: 87.5%; letter-spacing: -0.015em; line-height: 1.05; }
 .site-footer nav { display: grid; gap: 0.55rem; align-content: start; }
@@ -511,10 +521,14 @@ button { cursor: pointer; background: none; border: 0; padding: 0; }
 
 /* Logo concept plate ---------------------------------------------- */
 .logo-plate { display: grid; gap: 1rem; }
+.logo-plate__badge { border: 1px solid var(--rule); border-radius: var(--radius-lg); background: var(--white); padding: clamp(1rem, 0.5rem + 2vw, 2rem); display: grid; place-items: center; }
+.logo-plate__badge .badge { max-width: 22rem; }
 .logo-plate__masters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-.logo-plate__master { border-radius: var(--radius-lg); padding: 1.5rem; display: grid; place-items: center; border: 1px solid var(--rule); }
-.logo-plate__master--light { background: var(--white); }
-.logo-plate__master--dark { background: var(--ink); }
+.logo-plate__master { border-radius: var(--radius-lg); padding: 1.5rem 1rem; display: grid; place-items: center; gap: 0.6rem; border: 1px solid var(--rule); text-align: center; }
+.logo-plate__master svg { width: 4.5rem; height: auto; }
+.logo-plate__master span { font-size: var(--text-label); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; }
+.logo-plate__master--light { background: var(--white); color: var(--muted); }
+.logo-plate__master--dark { background: var(--ink); border-color: var(--rule-dark); color: var(--muted-dark); }
 
 /* Not found --------------------------------------------------------- */
 .hollow { min-height: 60dvh; display: grid; align-content: center; gap: 1.25rem; padding-block: var(--section); }
