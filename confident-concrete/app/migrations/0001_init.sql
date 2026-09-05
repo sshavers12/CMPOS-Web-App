@@ -1,0 +1,2 @@
+-- No database is provisioned for this site (app.manifest.json has db:false).
+-- Record storage remains an owner decision (BACKEND HOLD).
