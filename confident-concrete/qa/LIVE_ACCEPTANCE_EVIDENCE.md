@@ -1,9 +1,9 @@
 # Confident Concrete. Live acceptance evidence
 
 Target: https://confident-concrete.higgsfield.app  
-Run: 2026-09-05T13:13:05Z to 2026-09-05T13:17:49Z  
+Run: 2026-09-05T13:39Z to 2026-09-05T13:45Z (branding pass)  
 Tool: Playwright + headless Chromium, anonymous (no cookies, no sign-in).  
-Deploy commit (site repo): `1142f5bc660cadb0be4d75cd72d8a5eded941132`
+Deploy commit (site repo): `0f185bb80afe31bba2cb9f3c37a8338c0e6be3d0`
 
 ## Summary
 
@@ -140,6 +140,22 @@ https://d2ol7oe51mr4n9.cloudfront.net/user_31yrqQpNO1uRz1TyAwuUsNb1BnI/f6f6ad64-
 
 Raw report only:
 https://d2ol7oe51mr4n9.cloudfront.net/user_31yrqQpNO1uRz1TyAwuUsNb1BnI/f5377013-3b44-4ab8-858d-a9eda36416bd.json
+
+## Brand assets verified on the live page
+
+| Item | Live value |
+|---|---|
+| Hero badge source served | `/brand/logo-badge-560.webp` |
+| Hero badge loaded | true, 480x469 rendered |
+| Hero badge alt text | "Confident Concrete. Chester, Pennsylvania. Strong foundations, brighter tomorrow." |
+| Header CC monogram | present, 42x35 |
+| Footer badge | present, links home |
+| Favicon | `/favicon.svg`, charcoal tile with the CC monogram |
+| Brand orange token | `#f26b1d` |
+| Primary button | background `rgb(194, 69, 15)`, label `rgb(255, 255, 255)`, 4.9:1 |
+
+Archive for this run:
+https://d2ol7oe51mr4n9.cloudfront.net/user_31yrqQpNO1uRz1TyAwuUsNb1BnI/185ff479-6efc-40fb-ba7d-ac44d7300c79.zip
 
 ## How to re-run
 

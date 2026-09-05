@@ -14,7 +14,7 @@ still available for comparison. It was not modified, patched or reused.
 
 | Item | Value |
 |---|---|
-| Site repository commit (deployed) | `1142f5bc660cadb0be4d75cd72d8a5eded941132` |
+| Site repository commit (deployed) | `0f185bb80afe31bba2cb9f3c37a8338c0e6be3d0` |
 | Source of record (GitHub branch) | `claude/fable-5-1-mobile-rebuild-jde5z5` in `sshavers12/CMPOS-Web-App` |
 | Higgsfield website id | `dbdb0d24-4d0b-4c48-81fd-c478a6b59f95` |
 | Deploy status | deployed and published |
@@ -28,9 +28,14 @@ experience was rebuilt from a new direction described in `DESIGN_BRIEF.md`:
 - **Poured in place.** Formwork discipline (a strict grid), the pour (a dark charcoal hero
   where a painted chute pours cement grey into the page), then the finish (calm cement-toned
   content with scored joints between sections).
-- **Palette.** Cement `#EDEAE4`, slab `#E3DFD7`, charcoal `#1A1A19`, one accent, the
-  form-stake orange `#B8401A`. Black and white stay reserved for the logo masters, as Zane
-  asked. Nothing is green; the accent is never dominant.
+- **The owner's badge logo leads.** The supplied Confident Concrete badge (finisher, mixer
+  chute, river bridge, Chester PA lockup) is the primary mark. It sits in the hero, the footer
+  and the social card, with only the white surround removed so it works on both grounds. A CC
+  monogram redrawn as vector from the badge carries the header, the browser tab and small sizes.
+- **Palette taken from that logo.** Brand orange `#F26B1D`, deep orange `#D24C08`, silver
+  `#E6E9E7`, steel `#B0AEB1`, on cement `#EDEAE4` and charcoal `#1A1A19`. Buttons and links on
+  light grounds use a deepened `#C2450F` so white labels clear WCAG AA; the true brand orange
+  carries graphics and accent text on dark. Nothing is green.
 - **Type.** Archivo variable, self-hosted, width axis. Display type scales fluidly from 44px
   at 320px wide to 92px at 1440px. No `nowrap` on any text that can exceed a phone width.
 
@@ -70,12 +75,13 @@ Full detail in `qa/LIVE_ACCEPTANCE_EVIDENCE.md`.
 | Final published version verified, not only localhost | PASS, all results above are from the live URL |
 
 Totals: **64 responsive checks, 328 link and control checks, 4 accessibility checks,
-18 anonymous HTTP checks, 0 failures, 0 browser console errors.**
+18 anonymous HTTP checks, 0 failures, 0 browser console errors.** The suite was re-run in full
+against the live site after the branding pass, with the same result.
 
 ## Screenshot index
 
 `qa/LIVE_ACCEPTANCE_EVIDENCE.md` lists all 69 files. Archive with the machine-readable
-report: https://d2ol7oe51mr4n9.cloudfront.net/user_31yrqQpNO1uRz1TyAwuUsNb1BnI/f6f6ad64-e897-4415-8add-905ef198fcf9.zip
+report: https://d2ol7oe51mr4n9.cloudfront.net/user_31yrqQpNO1uRz1TyAwuUsNb1BnI/185ff479-6efc-40fb-ba7d-ac44d7300c79.zip
 
 ## Fact register: what the site says about the business
 
@@ -104,9 +110,10 @@ Where a visitor would expect one of those, the site says so in customer language
 2. **Portfolio is empty by design.** The before, during and after frames are visibly empty and
    labelled "Awaiting approved project photography". No stock or generated imagery is used
    anywhere as project proof.
-3. **The chute mark is a concept.** It refines Zane's own description (the rear half of a
-   mixer chute, with the name pouring from it) and is labelled as pending his approval on the
-   About page and in the footer.
+3. **Logo tagline versus spoken slogan.** The badge carries its own lockup text, "Chester, PA"
+   and "Strong foundations. Brighter tomorrow." The page's spoken slogan stays the approved
+   "We're pouring with confidence." If Zane wants the badge tagline used as site copy too, say
+   so and it takes one edit.
 4. **The Higgsfield subdomain is not a business domain.** If Zane wants
    `confidentconcrete.com` or similar, that is a domain purchase and a DNS change, not a
    rebuild.
@@ -119,7 +126,7 @@ Where a visitor would expect one of those, the site says so in customer language
 | # | Decision | Blocks |
 |---|---|---|
 | 1 | Public phone number and email address | Contact page, footer, QR page, business cards |
-| 2 | Final logo direction and approval of the chute mark | Logo lock, print, apparel, vehicle graphics |
+| 2 | Confirm the badge is the final logo, and whether the badge tagline should also be site copy | Logo lock, print, apparel, vehicle graphics |
 | 3 | Service menu and service area | The Services page currently describes the review rather than a list |
 | 4 | Approved project photography, captions and customer permission | Portfolio and before/after galleries |
 | 5 | Legal entity, license and insurance lines, if any are to be published | Footer and contact page |
